@@ -1,0 +1,44 @@
+#----------------------------------
+#  PnM to DIB filter for Susie32
+#  makefile for MS-VC++
+#----------------------------------
+
+CC	= cl
+LD	= link
+CFLAGS	= -nologo -MT -W3 -GB -O2 -GF -DSPI_IMPLEMENT_DLLMAIN
+LDFLAGS	= -nologo -opt:nowin98 -dll -map -base:0x10300000 -entry:DllMain
+
+OBJS	= spientry.obj ifpnm.obj spiio.obj spialloc.obj
+LIBS	= kernel32.lib
+DEF	= ifpnm.def
+TARGET	= ifpnm.spi
+
+
+$(TARGET) : $(OBJS) $(DEF)
+	$(LD) $(LDFLAGS) -out:$@ -def:$(DEF) $(OBJS) $(LIBS)
+
+rebuild: clean $(TARGET)
+
+clean: mostlyclean
+	if exist $(TARGET) del $(TARGET)
+	if exist $(TARGET:.spi=.map) del $(TARGET:.spi=.map)
+
+mostlyclean:
+	if exist *.obj del *.obj
+	if exist $(TARGET:.spi=.exp) del $(TARGET:.spi=.exp)
+	if exist $(TARGET:.spi=.lib) del $(TARGET:.spi=.lib)
+
+.c.obj::
+	$(CC) $(CFLAGS) -c $<
+
+.c.asm:
+	$(CC) $(CFLAGS) -c -FoNUL -FA $<
+
+.c.lst:
+	$(CC) $(CFLAGS) -c -FoNUL -FAc -Fa$*.lst $<
+
+spientry.obj : spientry.c spibase.h
+spialloc.obj : spialloc.c spibase.h
+spiio.obj    : spiio.c    spibase.h
+ifpnm.obj    : ifpnm.c    spibase.h
+

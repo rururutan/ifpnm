@@ -1,0 +1,39 @@
+#-----------------------------------------
+#  PnM to DIB filter for Susie32
+#  makefile for Borland C++ Compiler 5.5
+#-----------------------------------------
+
+CC	= bcc32
+LD	= ilink32
+CFLAGS	= -WD -q -d -O2 -OS -Oi -Oc -DSPI_IMPLEMENT_DLLMAIN
+LDFLAGS	= -Tpd -aa -q -b:0x10300000 -c -Gn -Gz -m
+
+OBJS	= spientry.obj ifpnm.obj spiio.obj spialloc.obj
+LIBS	= import32.lib
+TARGET	= ifpnm.spi
+
+
+$(TARGET) : $(OBJS)
+	$(LD) $(LDFLAGS) $(OBJS),$@,,$(LIBS)
+
+rebuild: clean $(TARGET)
+
+clean: mostlyclean
+	if exist $(TARGET) del $(TARGET)
+	if exist $(TARGET:.spi=.map) del $(TARGET:.spi=.map)
+
+mostlyclean:
+	if exist *.obj del *.obj
+	if exist *.tds del *.tds
+
+.c.obj:
+	$(CC) $(CFLAGS) -c $<
+
+.c.asm:
+	$(CC) $(CFLAGS) -S $<
+
+spientry.obj : spientry.c spibase.h
+spialloc.obj : spialloc.c spibase.h
+spiio.obj    : spiio.c    spibase.h
+ifpnm.obj    : ifpnm.c    spibase.h
+

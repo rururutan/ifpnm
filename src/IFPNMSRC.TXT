@@ -1,0 +1,126 @@
+[This file is written in Japanese (Shift-JIS Code).]
+----------------------------------------------------------------------
+          Susie32 PbmPlus Plug-in Ver.0.14 (ソースファイル)
+                        IFPNMSRC.TXT - 説明書
+----------------------------------------------------------------------
+
+■このソフトは
+
+  Susie32 PbmPlus Plug-in Ver.0.14 のソースファイル集(C言語)です。
+
+  作者側でコンパイルできることを確認している処理系は、以下のとおり
+  です。これら以外の処理系でも恐らくコンパイルは可能なものと思われま
+  す。
+
+    ・Microsoft Visual C++ ver.6.0 SP6
+    ・VC++ Toolkit 2003 + Platform SDK
+    ・Visual C++ 2005 Express Edition + Platform SDK
+    ・Borland C++ Compiler ver.5.5.1
+    ・MinGW (gcc 3.4.5)
+
+  ちなみに、正式リリース版は MinGW (gcc 3.4.5) でコンパイルされた
+  ものです。
+
+
+■同梱されているファイル
+
+    IFPNMSRC.TXT  このファイル
+
+    ifpnm.dsw     Microsoft Visual C++ Ver.6.0 用のワーク
+    ifpnm.dsp     スペースファイルとプロジェクトファイル。
+
+    makefile.vc   MSVC++ V.6.0 用の Makefile
+                  コマンドラインからビルドする場合はこれで。
+                  VC++ Toolkit 2003 や Visual C++ 2005
+                  Express Edition でも使える。
+
+    makefile.bcc  Borland C++ Compiler Ver.5.5.1 用の Makefile
+    makefile.mgw  MinGW 用の Makefile
+
+    ifpnm.c       メインソースファイル
+    ifpnm.def     関数を export するための DEF ファイル
+    spibase.h     Susie Plug-in Basic function library
+    spientry.c    Susie Plug-in API layer functions
+    spialloc.c    Susie Plug-in Memory-related functions
+    spiio.c       Susie Plug-in File I/O functions
+
+
+■ソースファイルに関して
+
+  この Plug-in では C言語の標準ライブラリ関数を一切使わず、すべて
+  Windows の API 関数を利用するようにしています。ファイルサイズを
+  小さく抑えるため、エントリポイントに DllMain を直接指定することで、
+  使用されないCランタイム環境がリンクされるのを抑制しています(VC++
+  の場合は Release 構成の時のみ)。
+
+
+■著作権・利用上の承諾事項など
+
+  このソフトウェアは PDS (Public Domain Software) です。私(宮坂 賢)は、
+  このソフトウェアについての一切の著作権を放棄し、(現在の日本の法規
+  では放棄できない)著作者人格権についてもその権利を主張しないものと
+  します。
+
+  したがって、このソフトウェアの取り扱いに関する制限は(運用・転載・
+  再配布・改造・ソースコードの再利用なども含めて)まったくありませんし、
+  作者(私)に許可を求める必要もまったくありません。
+
+  ただし、作者(私)はこのソフトウェアに関して何の保証もしないものとし、
+  また如何なる責任・義務も負わないものとさせていただきます。
+
+
+■このソフトウェアの一次配布元
+
+  以下のホームページが一次配布元です。最新版がダウンロードできます。
+
+  "ソフトウェア工房α"
+    http://cetus.sakura.ne.jp/softlab/
+
+
+■参考文献など
+
+  ・Netpbm Release 9.9 の man ページ - pbm(5), pgm(5), ppm(5)
+
+
+■改版履歴
+
+  2000/11/21 V0.10   ・正式版公開。
+  2001/02/12         ・Borland C++ Compiler 5.5.1 でコンパイルでき
+                       るようにした。
+  2001/02/15 V0.11   ・正式版公開。
+  2002/07/29         ・Netpbm Release 9.9 (2000/11/20版) での定義・
+                       実装に従い、PGM/PPM(raw)形式で maxval が 255
+                       を越えている場合はサンプル値が big-endian
+                       (MSB-first) 形式の2バイト整数で記録されて
+                       いるものとして扱うように仕様変更した。
+  2002/07/30         ・読み込みバッファのサイズを倍の64KBに増やした。
+                     ・ヘッダ中にある内蔵コメントの位置によっては、
+                       「破損ファイル」エラーが出て画像が読み込め
+                       ないことがあるバグを修正した。
+  2002/07/31 V0.12   ・正式版公開。
+  2004/04/01         ・イメージベースアドレスを、DLL のデフォルト
+                       ベースアドレスに近い 0x10300000 に変更。
+                       これは、アドレス空間が分断されるのを避ける
+                       ため。
+                     ・コンパイラを gcc 2.8.1 から gcc 3.3.3 に
+                       替えた。5～15% 程度高速化。
+  2004/04/02         ・pbm/plain(ascii) 形式で、画像の幅が８の倍数
+                       でないとき、画像の右端が欠けたりずれたりする
+                       バグを修正。
+  2004/04/05 V0.13   ・正式版公開。
+  2004/11/23         ・Microsoft Visual C++ Toolkit 2003 +
+                       Platform SDK でコンパイルできるようにした。
+  2004/11/24         ・使用する処理系を、RSXNT-DJ (gcc-3.3.3) から
+                       MinGW (gcc-3.4.2) に変更。さらに、ソースコ
+                       ード集における RSXNT/RSXNT-DJ をサポートを
+                       停止した。
+  2006/04/16         ・コンパイラのバージョンを gcc 3.4.2 から gcc
+                       3.4.5 に更新した。
+                     ・ディスクファイルから読み込むときの読み込み
+                       バッファを 256KB に増やした。
+  2006/04/18 V0.14   ・正式版公開。
+
+
+
+           E-Mail Address : alkaid@coral.ocn.ne.jp (MIYASAKA Masaru)
+[EOF]

@@ -1,0 +1,51 @@
+#---------------------------------
+#  PnM to DIB filter for Susie32
+#  makefile for MinGW
+#---------------------------------
+
+CC	= gcc
+LD	= gcc
+# For gcc 3.4.x
+CFLAGS	= -Wall -pedantic -O2 -fweb -frename-registers -fomit-frame-pointer \
+	  -mtune=pentium -march=i386 -mpreferred-stack-boundary=2 \
+	  -Ddllimport=unused -DSPI_IMPLEMENT_DLLMAIN $(COPT)
+# For gcc 3.3.x
+#CFLAGS	= -Wall -pedantic -O2 -frename-registers -fomit-frame-pointer \
+#	  -mcpu=pentium -march=i386 -mpreferred-stack-boundary=2 \
+#	  -Ddllimport=unused -DSPI_IMPLEMENT_DLLMAIN $(COPT)
+LDFLAGS	= -Wall -pedantic -s -shared -nostartfiles -e _DllMain@12 \
+	  -Wl,--image-base,0x10300000 -Wl,--subsystem,windows \
+	  -Wl,--enable-stdcall-fixup
+MAP	= -Wl,-Map,$(TARGET:.spi=.map)
+
+OBJS	= spientry.o ifpnm.o spiio.o spialloc.o
+DEF	= ifpnm.def
+TARGET	= ifpnm.spi
+
+
+$(TARGET): $(OBJS) $(DEF)
+	$(LD) $(LDFLAGS) $(MAP) -o $@ $(OBJS) $(DEF)
+
+rebuild: clean $(TARGET)
+
+clean: mostlyclean
+	if exist $(TARGET) del $(TARGET)
+	if exist $(TARGET:.spi=.map) del $(TARGET:.spi=.map)
+
+mostlyclean:
+	if exist *.o   del *.o
+
+%.o : %.c
+	$(CC) $(CFLAGS) -c $<
+
+%.s : %.c
+	$(CC) $(CFLAGS) -S -fverbose-asm -masm=intel $<
+
+%.lst : %.s
+	$(CC) -Wa,-als=$@ -c -o NUL $<
+
+spientry.o : spientry.c spibase.h
+spialloc.o : spialloc.c spibase.h
+spiio.o    : spiio.c    spibase.h
+ifpnm.o    : ifpnm.c    spibase.h
+
