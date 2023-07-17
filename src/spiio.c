@@ -42,7 +42,7 @@
 /*
 **		入力ストリームのオープン
 */
-int SpiOpen(SPI_FILE *fp, LPSTR buf, long len, unsigned int flag)
+int SpiOpen(SPI_FILE *fp, LPSTR buf, LONG_PTR len, unsigned int flag)
 {
 	HANDLE hFile;
 	LPBYTE pBuff;
@@ -58,7 +58,7 @@ int SpiOpen(SPI_FILE *fp, LPSTR buf, long len, unsigned int flag)
 		if (hFile == INVALID_HANDLE_VALUE)
 					return SPI_ERROR_FILE_READ;
 		if (len != 0)
-			SetFilePointer(hFile, len, NULL, FILE_BEGIN);
+			SetFilePointer(hFile, (LONG)len, NULL, FILE_BEGIN);
 		pBuff = (LPBYTE)LocalAlloc(LMEM_FIXED, SPI_BUFSIZ);
 		if (pBuff == NULL) {
 			CloseHandle(hFile);

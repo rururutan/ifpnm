@@ -117,7 +117,7 @@ int GetImageInfo(SPI_FILE *fp, PictureInfo *lpInfo)
 **		.pnm ファイルの画像を展開する
 */
 int GetImage(SPI_FILE *fp, HANDLE *pHBInfo, HANDLE *pHBImg,
-             SPIPROC lpProgCallback, long lData)
+             SPIPROC lpProgCallback, LONG_PTR lData)
 {
 	enum { NCALL = 120 };	/* コールバック関数を呼ぶ回数 */
 	PNM pnm;
