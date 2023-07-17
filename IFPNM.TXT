@@ -1,129 +1,129 @@
-[This file is written in Japanese (Shift-JIS Code).]
+[This file is written in Japanese (UTF-8 Code).]
 ----------------------------------------------------------------------
                    Susie32 PbmPlus Plug-in Ver.0.14
-                          IFPNM.TXT - ������
+                          IFPNM.TXT - 説明書
 ----------------------------------------------------------------------
 
-�����̃\�t�g��
+■このソフトは
 
-  UNIX �n�� OS �ł悭�g���閳���k�摜�`���ł��� PbmPlus
-  (PBM/PGM/PPM) �t�H�[�}�b�g�̉摜�t�@�C�����ASusie32 �ŕ\��������
-  ���߂� Plug-in �ł��B
-
-
-������\�� OS
-
-  Win32 �̃v���O�����𓮍삳���邱�Ƃ̂ł��� OS (Windows95/98/Me/NT/
-  2000/XP �Ȃ�) ���K�v�ł��B�Ȃ��AWindows 3.1 + Win32s (Ver.1.30c)
-  �ł̓�����m�F���Ă��܂��B
+  UNIX 系の OS でよく使われる無圧縮画像形式である PbmPlus
+  (PBM/PGM/PPM) フォーマットの画像ファイルを、Susie32 で表示させる
+  ための Plug-in です。
 
 
-����������Ă���t�@�C��
+■動作可能な OS
 
-    IFPNM014.TXT    �ȈՐ����t�@�C��
-    IFPNM.TXT       ���̃t�@�C��
-    IFPNM.SPI       �v���O�C���t�@�C���{��
-    IFPNMSRC.LZH    �\�[�X�R�[�h�����߂��A�[�J�C�u�t�@�C��
-
-
-���C���X�g�[��
-
-  Susie ���C���X�g�[������Ă���ꍇ�� Susie �̂���t�H���_�ɁA
-  �����łȂ��ꍇ�� Windows �� System �t�H���_�ɁAIFPNM.SPI ���R�s�[
-  ���Ă��������B��{�I�ɁA���Ƃ͉�������K�v�͂���܂���BSusie �ȊO
-  �̃\�t�g�̏ꍇ�ŁA�v���O�C���t�@�C���̃C���X�g�[���ꏊ���w�肳���
-  ����ꍇ�́A���̎w��ɏ]���Ă��������B
-
-  IFPNMSRC.LZH �Ɏ��߂��Ă���t�@�C���́A���̃\�t�g�̃\�[�X�R�[�h
-  �ł��B����́A�\�t�g�����ۂɎg�p�����t�@�C���Ȃ̂ŁA���ʂɃv���O
-  �C���𗘗p���邾���Ȃ�ΕK�v�͂���܂���(�̂ō폜���Ă��n�j�ł�)�B
-  �v���O���~���O�ɋ����̂�����́A�v���O�C������̎Q�l�ɂ���Ȃǂ���
-  �����p���������B
+  Win32 のプログラムを動作させることのできる OS (Windows95/98/Me/NT/
+  2000/XP など) が必要です。なお、Windows 3.1 + Win32s (Ver.1.30c)
+  での動作も確認しています。
 
 
-���Ή����Ă���t�@�C���`��
+■同梱されているファイル
+
+    IFPNM014.TXT    簡易説明ファイル
+    IFPNM.TXT       このファイル
+    IFPNM.SPI       プラグインファイル本体
+    IFPNMSRC.LZH    ソースコードを収めたアーカイブファイル
+
+
+■インストール
+
+  Susie がインストールされている場合は Susie のあるフォルダに、
+  そうでない場合は Windows の System フォルダに、IFPNM.SPI をコピー
+  してください。基本的に、あとは何もする必要はありません。Susie 以外
+  のソフトの場合で、プラグインファイルのインストール場所が指定されて
+  いる場合は、その指定に従ってください。
+
+  IFPNMSRC.LZH に収められているファイルは、このソフトのソースコード
+  です。これは、ソフトを作る際に使用したファイルなので、普通にプラグ
+  インを利用するだけならば必要はありません(ので削除してもＯＫです)。
+  プログラミングに興味のある方は、プラグイン製作の参考にするなどして
+  ご利用ください。
+
+
+■対応しているファイル形式
 
   pbm(portable bitmap) / pgm(portable graymap) / ppm(portable pixmap)
-  �`���́A���ꂼ�� plain(ascii)/raw(binary) �G���R�[�h�̂��̂ɑΉ�
-  ���Ă��܂�(����m�F�ς݂ł�)�B
+  形式の、それぞれ plain(ascii)/raw(binary) エンコードのものに対応
+  しています(動作確認済みです)。
 
-  �܂� pgm/ppm �`���ł́A255 �ȊO�� maxval(�ő�T���v���l) ������
-  �t�@�C�����ǂݍ��߂܂��B�Ȃ��Araw �G���R�[�h�̏ꍇ�� maxval ��
-  255 ���z���Ă���ꍇ�́A���̃T���v���l�� big-endian (MSB-first)
-  �`�� 2�o�C�g����(����)�ŕ\������Ă�����̂Ƃ��ēǂݍ��݂܂��B
+  また pgm/ppm 形式では、255 以外の maxval(最大サンプル値) を持つ
+  ファイルも読み込めます。なお、raw エンコードの場合で maxval が
+  255 を越えている場合は、そのサンプル値が big-endian (MSB-first)
+  形式 2バイト整数(※注)で表現されているものとして読み込みます。
 
-  ����) �� Plug-in �̈ȑO�̃o�[�W����(V.0.11�ȑO)�ł́Alittle-endian
-        (LSB-first) �`�� 2�o�C�g�����Ƃ��ĉ��߂��Ă��܂������A
-        Netpbm Release 9.9 (2000/11/20��) �ł̒�`�ɏ]���A�d�l�ύX��
-        �s�Ȃ��܂����B
-
-
-���d�l��̐����Ȃ�
-
-  �����R�����g�ɂ��ẮA�t�@�C���̐擪����(�w�b�_����)�ɑ��݂���
-  ���̂����F�����܂���Bplain(ascii) �G���R�[�h�̏ꍇ�ŁA�����A
-  �摜�f�[�^�̒��ɓ����R�����g�����݂��Ă���ꍇ�́A�摜�f�[�^��
-  ����ɓǂݍ��߂܂���B�����Ƃ��APbmPlus �t�@�C���̎d�l�ł́A����
-  �R�����g�̓w�b�_�����ɂ������݂��Ă͂����Ȃ����̂ƂȂ��Ă��܂����B
+  ※注) 当 Plug-in の以前のバージョン(V.0.11以前)では、little-endian
+        (LSB-first) 形式 2バイト整数として解釈していましたが、
+        Netpbm Release 9.9 (2000/11/20版) での定義に従い、仕様変更を
+        行ないました。
 
 
-�����쌠�E���p��̏��������Ȃ�
+■仕様上の制限など
 
-  ���̃\�t�g�E�F�A�� PDS (Public Domain Software) �ł��B��(�{�� ��)�́A
-  ���̃\�t�g�E�F�A�ɂ��Ă̈�؂̒��쌠��������A(���݂̓��{�̖@�K
-  �ł͕����ł��Ȃ�)����Ґl�i���ɂ��Ă����̌������咣���Ȃ����̂�
-  ���܂��B
-
-  ���������āA���̃\�t�g�E�F�A�̎�舵���Ɋւ��鐧����(�^�p�E�]�ځE
-  �Ĕz�z�E�����E�\�[�X�R�[�h�̍ė��p�Ȃǂ��܂߂�)�܂���������܂��񂵁A
-  ���(��)�ɋ������߂�K�v���܂���������܂���B
-
-  �������A���(��)�͂��̃\�t�g�E�F�A�Ɋւ��ĉ��̕ۏ؂����Ȃ����̂Ƃ��A
-  �܂��@���Ȃ�ӔC�E�`��������Ȃ����̂Ƃ����Ă��������܂��B
+  内蔵コメントについては、ファイルの先頭部分(ヘッダ部分)に存在する
+  ものしか認識しません。plain(ascii) エンコードの場合で、もし、
+  画像データの中に内蔵コメントが混在している場合は、画像データを
+  正常に読み込めません。もっとも、PbmPlus ファイルの仕様では、内蔵
+  コメントはヘッダ部分にしか存在してはいけないものとなっていますが。
 
 
-�����̃\�t�g�E�F�A�̈ꎟ�z�z��
+■著作権・利用上の承諾事項など
 
-  �ȉ��̃z�[���y�[�W���ꎟ�z�z���ł��B�ŐV�ł��_�E�����[�h�ł��܂��B
+  このソフトウェアは PDS (Public Domain Software) です。私(宮坂 賢)は、
+  このソフトウェアについての一切の著作権を放棄し、(現在の日本の法規
+  では放棄できない)著作者人格権についてもその権利を主張しないものと
+  します。
 
-  "�\�t�g�E�F�A�H�[��"
+  したがって、このソフトウェアの取り扱いに関する制限は(運用・転載・
+  再配布・改造・ソースコードの再利用なども含めて)まったくありませんし、
+  作者(私)に許可を求める必要もまったくありません。
+
+  ただし、作者(私)はこのソフトウェアに関して何の保証もしないものとし、
+  また如何なる責任・義務も負わないものとさせていただきます。
+
+
+■このソフトウェアの一次配布元
+
+  以下のホームページが一次配布元です。最新版がダウンロードできます。
+
+  "ソフトウェア工房α"
     http://cetus.sakura.ne.jp/softlab/
 
 
-�����ŗ���
+■改版履歴
 
-  ��Ver.0.10 (2000/11/21)
+  ●Ver.0.10 (2000/11/21)
 
-    �E������(����)���J�B
+    ・正式版(初版)公開。
 
-  ��Ver.0.11 (2001/02/15)
+  ●Ver.0.11 (2001/02/15)
 
-    �E�v���O����(�v���O�C��)���̂ɂ͕ύX�_�͂���܂��񂪁A�\�[�X
-      �R�[�h�̕����኱�C�����܂����B
+    ・プログラム(プラグイン)自体には変更点はありませんが、ソース
+      コードの方を若干修正しました。
 
-  ��Ver.0.12 (2002/07/31)
+  ●Ver.0.12 (2002/07/31)
 
-    �ENetpbm Release 9.9 (2000/11/20��) �ł̒�`�E�����ɏ]���A
-      PGM/PPM(raw)�`���� maxval �� 255 ���z���Ă���ꍇ�̓T���v��
-      �l�� big-endian (MSB-first) �`����2�o�C�g�����ŋL�^�����
-      ������̂Ƃ��Ĉ����悤�Ɏd�l�ύX�����B
+    ・Netpbm Release 9.9 (2000/11/20版) での定義・実装に従い、
+      PGM/PPM(raw)形式で maxval が 255 を越えている場合はサンプル
+      値が big-endian (MSB-first) 形式の2バイト整数で記録されて
+      いるものとして扱うように仕様変更した。
 
-    �Epnm �t�@�C�����ɓ����R�����g�����݂���Ƃ��A�ꍇ�ɂ���Ă�
-      �u�j���t�@�C���v�G���[���o�ĉ摜���ǂݍ��߂Ȃ����Ƃ�����o�O
-      ���C�������B
+    ・pnm ファイル中に内蔵コメントが存在するとき、場合によっては
+      「破損ファイル」エラーが出て画像が読み込めないことがあるバグ
+      を修正した。
 
-  ��Ver.0.13 (2004/04/05)
+  ●Ver.0.13 (2004/04/05)
 
-    �E���s�t�@�C���𐶐�����R���p�C���� gcc 3.3.3 �ɕύX�B�ȑO��
-      �o�[�W�����������ς� 5�`15% ���x�����ɂȂ����B
+    ・実行ファイルを生成するコンパイラを gcc 3.3.3 に変更。以前の
+      バージョンよりも平均で 5～15% 程度高速になった。
 
-    �Epbm/plain(ascii) �`���ŁA�摜�̕����W�̔{���łȂ��Ƃ��A
-      �摜�̉E�[���������肸�ꂽ�肷��o�O���C�������B
+    ・pbm/plain(ascii) 形式で、画像の幅が８の倍数でないとき、
+      画像の右端が欠けたりずれたりするバグを修正した。
 
-  ��Ver.0.14 (2006/04/18)
+  ●Ver.0.14 (2006/04/18)
 
-    �E�f�B�X�N�t�@�C������摜��ǂݍ��ނƂ��̓ǂݍ��݃o�b�t�@��
-      �T�C�Y�� 256KB �ɑ��₵�܂����B
+    ・ディスクファイルから画像を読み込むときの読み込みバッファの
+      サイズを 256KB に増やしました。
 
 
 
