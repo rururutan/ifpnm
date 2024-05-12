@@ -11,7 +11,7 @@
 
 #include "spibase.h"
 
-#define IFPNM_VERSION	"0.14"		/* プラグインバージョン */
+#define IFPNM_VERSION	"0.14+1"		/* プラグインバージョン */
 
 #define IsDigit(c)		('0'<=(c) && (c)<='9')
 #define IsSpace(c)		((c)=='\n' || (c)==' ' || (c)=='\t' || (c)=='\r')
